@@ -34,13 +34,11 @@
 
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-      <a class="navbar-brand mr-1" href="scorecard.php">Sistema de Notas ao Vivo</a>
+      <b class="navbar-brand mr-1">Sistema de Notas ao Vivo</b>
 
-      <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
-        <i class="fas fa-bars"></i>
-      </button>
+      
 
-      <h5 style="margin-left: 2%" class="text-white bg-dark"><?php echo 'Olá '. $_SESSION['usuario'];?></h5>
+      <h5 style="margin-left: 2%; margin-top: 8px" class="text-white bg-dark"><?php echo 'Olá '. $_SESSION['usuario'];?></h5>
       
 
       <!-- Navbar Search -->
@@ -74,21 +72,8 @@
 
     <div id="wrapper">
 
-      <!-- Sidebar -->
-      <ul class="sidebar navbar-nav">
-        <li class="nav-item active">
-          <a class="nav-link" href="scorecard.php">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Score Card</span></a>
-        </li>
-        <li class="nav-item ">
-          <a class="nav-link" href="ordemdeentrada.php">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Ordem de entrada</span>
-          </a>
-        </li>
-        
-      </ul>
+     
+    
 
       <div id="content-wrapper">
 
@@ -100,6 +85,27 @@
               Score Card
             </div>
             <div class="card-body">
+              <form method="post" >
+               
+              <div class="input-group">
+                <select class="custom-select"  name="provaid"  >
+                  <option value="0" selected="active">Selecione a categoria</option>
+                  <option value="1">Derby Aberta n2 n3 n4</option>
+                  <option value="2">Derby Aberta n1</option>
+                  <option value="3">Derby Amador n2 n3 n4</option>
+                  <option value="4">Derby Amador n1</option>
+                  <option value="5">Derby Pré futurity Aberta n2 n3 n4</option>
+                  <option value="6">Derby Pré futurity Amador n2 n3 n4</option>
+                  <option value="7">Derby Jovem</option>
+                  <option value="8">Derby Jovem 10</option>
+                </select>
+             <div class="input-group-append">
+                <button class="btn btn-outline-secondary"  type="submit">Carregar</button>
+             </div>
+            </div>
+              </form>
+              
+
               <div class="table-responsive">
                 <table class="table table-striped">
                       <thead>
@@ -164,10 +170,23 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <!-- linha 1-->
+                        <!-- linha 1--><?php
+                         include('conexao.php');
+                        
+                      if (isset($_POST['provaid'])) {
+                        
+                      
+                      $prova=$_POST['provaid'];                   
+                      $query =("select draw, exh, provanome, provacategoria from conjunto inner join prova on conjunto.provaid=prova.provaid
+                        where conjunto.provaid='$prova';") or die(mysql_error());
+                      $resultado = mysqli_query($conexao,$query);
+                        while ($dados = mysqli_fetch_assoc($resultado)) {
+                          
+                        
+                        ?>
                         <tr>
-                          <td><h4>1</h4></td>
-                          <td><h4>2</h4></td>
+                          <td><h5><?php echo $dados['draw'];?></h5></td>
+                          <td><h5><?php echo $dados['exh'];?></h5></td>
                          <td><strong>penalty<br>score</strong></td>
                            <td>
                             <input type="number" name="" style="width: 72px; height: 40px"><br>
@@ -279,6 +298,7 @@
 
                             </td>                         
                         </tr>
+                      <?php }}?>
                       </tbody>
                     </table>
               </div>
@@ -293,7 +313,7 @@
         <!-- /.container-fluid -->
 
         <!-- Sticky Footer -->
-        <footer class="sticky-footer">
+        <footer class="sticky-footer" style="width: 100%">
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
               <span>Copyright © Sistema de Notas ao Vivo</span>

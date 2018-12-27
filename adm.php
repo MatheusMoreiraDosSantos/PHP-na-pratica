@@ -34,13 +34,13 @@
 
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-      <a class="navbar-brand mr-1" href="adm.php">Sistema de Notas ao Vivo</a>
+      <b class="navbar-brand mr-1">Sistema de Notas ao Vivo</b>
 
       <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
         <i class="fas fa-bars"></i>
       </button>
 
-      <h5 style="margin-left: 2%" class="text-white bg-dark"><?php echo 'Olá '. $_SESSION['usuario'];?></h5>
+      <h5 style="margin-left: 2%; margin-top: 8px" class="text-white bg-dark"><?php echo 'Olá '. $_SESSION['usuario'];?></h5>
       
 
       <!-- Navbar Search -->
@@ -91,23 +91,24 @@
       </ul>
 
       <div id="content-wrapper">
-
+        
        
         <center><form method="post" action="cadastraconjunto.php">
+
           <div class="card-body" style="width: 35rem;">
             <img class="" src="img/cadastrar.jpg" alt="Imagem de capa do card" width="300px" style="margin-top: -30px">
             <div class="card-body" >
              <h5 class="card-title">Cadastrar Conjunto</h5>
-                <select class="form-control form-control-lg" name="categoria" >
-                <option>Selecione a categoria</option>
-                <option>Derby Aberta n2 n3 n4</option>
-                <option>Derby Aberta n1</option>
-                <option>Derby Amador n2 n3 n4</option>
-                <option>Derby Amador n1</option>
-                <option>Derby Pré futurity Aberta n2 n3 n4</option>
-                <option>Derby Pré futurity Amador n2 n3 n4</option>
-                <option>Derby Jovem</option>
-                <option>Derby Jovem 10</option>
+                <select class="form-control form-control-lg" name="prova" >
+                <option value="0">Selecione a categoria</option>
+                <option value="1">Derby Aberta n2 n3 n4</option>
+                <option value="2">Derby Aberta n1</option>
+                <option value="3">Derby Amador n2 n3 n4</option>
+                <option value="4">Derby Amador n1</option>
+                <option value="5">Derby Pré futurity Aberta n2 n3 n4</option>
+                <option value="6">Derby Pré futurity Amador n2 n3 n4</option>
+                <option value="7">Derby Jovem</option>
+                <option value="8">Derby Jovem 10</option>
 
                 </select>
                 <div class="form-group" style="margin: 10px">
@@ -119,7 +120,9 @@
                   <button type="submit" class="btn btn-dark">Cadastrar</button>
 
             </div>
-        </div></form></center>
+        </div>
+        
+      </form></center>
 
           
 
