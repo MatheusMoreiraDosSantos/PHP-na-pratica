@@ -73,7 +73,7 @@ function percursos() {
 		document.getElementById("manobra8").innerHTML = 'E+R';
 	}
 	if (btnpercurso == 8) {
-		ocument.getElementById("manobra1").innerHTML = '4SE';
+		document.getElementById("manobra1").innerHTML = '4SE';
 		document.getElementById("manobra2").innerHTML = '4SD';
 		document.getElementById("manobra3").innerHTML = 'CD gpg';
 		document.getElementById("manobra4").innerHTML = 'CE gpg';

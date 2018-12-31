@@ -89,7 +89,7 @@
                
               <div class="input-group">
                 <select class="custom-select"  name="provaid"  >
-                  <option value="0" selected="active">Selecione a categoria</option>
+                  <option value="0" selected="">Selecione a categoria</option>
                   <option value="1">Derby Aberta n2 n3 n4</option>
                   <option value="2">Derby Aberta n1</option>
                   <option value="3">Derby Amador n2 n3 n4</option>
@@ -104,10 +104,27 @@
              </div>
             </div>
               </form>
+              <?php
+                       include('conexao.php');
+                        
+                      if (isset($_POST['provaid'])) {
+                        
+                      
+                      $prova=$_POST['provaid'];                   
+                      $query =("select draw, exh, provanome, provacategoria from conjunto inner join prova on conjunto.provaid=prova.provaid
+                        where conjunto.provaid='$prova';") or die(mysql_error());
+                      $resultado = mysqli_query($conexao,$query);
+                      $dados = mysqli_fetch_assoc($resultado);
+                  ?>
+                  
+            <center><h5><?php echo $dados['provanome'];?>    <?php echo $dados['provacategoria'];?></h5></center>
+                          
               
 
               <div class="table-responsive">
                 <table class="table table-striped">
+
+                  
                       <thead>
                         <tr>
                           
@@ -171,15 +188,7 @@
                       </thead>
                       <tbody>
                         <!-- linha 1--><?php
-                         include('conexao.php');
-                        
-                      if (isset($_POST['provaid'])) {
-                        
-                      
-                      $prova=$_POST['provaid'];                   
-                      $query =("select draw, exh, provanome, provacategoria from conjunto inner join prova on conjunto.provaid=prova.provaid
-                        where conjunto.provaid='$prova';") or die(mysql_error());
-                      $resultado = mysqli_query($conexao,$query);
+                    
                         while ($dados = mysqli_fetch_assoc($resultado)) {
                           
                         
@@ -191,104 +200,104 @@
                            <td>
                             <input type="number" name="" style="width: 72px; height: 40px"><br>
                                 <select id="n2" style="height:40px">
-                                    <option>-1 1/2</option>
-                                    <option>-1</option>
-                                    <option>-1/2</option>
-                                    <option selected="">0</option>
-                                    <option>+1/2</option>
-                                    <option>+1</option>
                                     <option>+1 1/2</option>
+                                    <option>+1</option>
+                                    <option>+1/2</option>
+                                    <option selected="">0</option>
+                                    <option>-1/2</option>
+                                    <option>-1</option>
+                                    <option>-1 1/2</option>
 
                                 </select>
                             </td>
                            <td>
                             <input type="number" name="" style="width: 72px; height: 40px"><br>
                                 <select style="height:40px">
-                                    <option>-1 1/2</option>
-                                    <option>-1</option>
-                                    <option>-1/2</option>
-                                   <option selected="">0</option>
-                                    <option>+1/2</option>
-                                    <option>+1</option>
                                     <option>+1 1/2</option>
+                                    <option>+1</option>
+                                    <option>+1/2</option>
+                                    <option selected="">0</option>
+                                    <option>-1/2</option>
+                                    <option>-1</option>
+                                    <option>-1 1/2</option>
 
                                 </select>
                             </td>
                            <td>
                             <input type="number" name="" style="width: 72px; height: 40px"><br>
                                 <select id="n3" style="height:40px">
-                                    <option>-1 1/2</option>
-                                    <option>-1</option>
-                                    <option>-1/2</option>
-                                    <option selected="">0</option>
-                                    <option>+1/2</option>
-                                    <option>+1</option>
                                     <option>+1 1/2</option>
+                                    <option>+1</option>
+                                    <option>+1/2</option>
+                                    <option selected="">0</option>
+                                    <option>-1/2</option>
+                                    <option>-1</option>
+                                    <option>-1 1/2</option>
 
                                 </select>
                             </td>
                            <td>
                             <input type="number" name="" style="width: 72px; height: 40px"><br>
                                 <select id="n4" style="height:40px">
-                                    <option>-1 1/2</option>
-                                    <option>-1</option>
-                                    <option>-1/2</option>
-                                    <option selected="">0</option>
-                                    <option>+1/2</option>
-                                    <option>+1</option>
                                     <option>+1 1/2</option>
+                                    <option>+1</option>
+                                    <option>+1/2</option>
+                                    <option selected="">0</option>
+                                    <option>-1/2</option>
+                                    <option>-1</option>
+                                    <option>-1 1/2</option>
 
                                 </select>
                             </td>
                            <td>
                             <input type="number" name="" style="width: 72px; height: 40px"><br>
                                 <select id="n5" style="height:40px">
-                                    <option>-1 1/2</option>
-                                    <option>-1</option>
-                                    <option>-1/2</option>
-                                    <option selected="">0</option>
-                                    <option>+1/2</option>
+                                   <option>+1 1/2</option>
                                     <option>+1</option>
-                                    <option>+1 1/2</option>
+                                    <option>+1/2</option>
+                                    <option selected="">0</option>
+                                    <option>-1/2</option>
+                                    <option>-1</option>
+                                    <option>-1 1/2</option>
 
                                 </select>
                             </td>
                            <td>
                             <input type="number" name="" style="width: 72px; height: 40px"><br>
                                 <select id="n6" style="height:40px">
-                                    <option>-1 1/2</option>
-                                    <option>-1</option>
-                                    <option>-1/2</option>
-                                    <option selected="">0</option>
-                                    <option>+1/2</option>
+                                   <option>+1 1/2</option>
                                     <option>+1</option>
-                                    <option>+1 1/2</option>
+                                    <option>+1/2</option>
+                                    <option selected="">0</option>
+                                    <option>-1/2</option>
+                                    <option>-1</option>
+                                    <option>-1 1/2</option>
 
                                 </select>
                             </td>
                            <td>
                             <input type="number" name="" style="width: 72px; height: 40px"><br>
                                 <select id="n7" style="height:40px">
-                                    <option>-1 1/2</option>
-                                    <option>-1</option>
-                                    <option>-1/2</option>
-                                    <option selected="">0</option>
-                                    <option>+1/2</option>
-                                    <option>+1</option>
                                     <option>+1 1/2</option>
+                                    <option>+1</option>
+                                    <option>+1/2</option>
+                                    <option selected="">0</option>
+                                    <option>-1/2</option>
+                                    <option>-1</option>
+                                    <option>-1 1/2</option>
 
                                 </select>
                             </td>
                           <td>
                             <input type="number" name="" style="width: 72px; height: 40px"><br>
                                 <select id="n8" style="height:40px">
-                                    <option>-1 1/2</option>
-                                    <option>-1</option>
-                                    <option>-1/2</option>
-                                    <option selected="">0</option>
-                                    <option>+1/2</option>
-                                    <option>+1</option>
                                     <option>+1 1/2</option>
+                                    <option>+1</option>
+                                    <option>+1/2</option>
+                                    <option selected="">0</option>
+                                    <option>-1/2</option>
+                                    <option>-1</option>
+                                    <option>-1 1/2</option>
 
                                 </select>
                             </td> 

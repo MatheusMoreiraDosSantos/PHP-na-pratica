@@ -76,12 +76,12 @@
 
       <!-- Sidebar -->
       <ul class="sidebar navbar-nav">
-        <li class="nav-item active">
+        <li class="nav-item ">
           <a class="nav-link" href="adm.php">
             <i class="fas fa-fw fa-table"></i>
             <span>Administrador</span></a>
         </li>
-        <li class="nav-item ">
+        <li class="nav-item active">
           <a class="nav-link" href="oeadm.php">
             <i class="fas fa-fw fa-table"></i>
             <span>Ordem de entrada</span>
@@ -91,66 +91,114 @@
       </ul>
 
       <div id="content-wrapper">
-        
-       
-        <center><form method="post" action="cadastraconjunto.php">
-
-          <div class="card-body" style="width: 35rem;">
-            <img class="" src="img/cadastrar.jpg" alt="Imagem de capa do card" width="200px" style="margin-top: -50px">
-            <div class="card-body" >
-             <h5 class="card-title">Cadastrar Conjunto</h5>
-                <select class="form-control form-control-lg" name="prova" >
-                <option value="0">Selecione a categoria</option>
-                <option value="1">Derby Aberta n2 n3 n4</option>
-                <option value="2">Derby Aberta n1</option>
-                <option value="3">Derby Amador n2 n3 n4</option>
-                <option value="4">Derby Amador n1</option>
-                <option value="5">Derby Pré futurity Aberta n2 n3 n4</option>
-                <option value="6">Derby Pré futurity Amador n2 n3 n4</option>
-                <option value="7">Derby Jovem</option>
-                <option value="8">Derby Jovem 10</option>
-
+         <div class="card-body">
+        <form method="post" >
+               
+              <div class="input-group">
+                <select class="custom-select"  name="provaid"  >
+                  <option value="0" selected="">Selecione a categoria</option>
+                  <option value="1">Derby Aberta n2 n3 n4</option>
+                  <option value="2">Derby Aberta n1</option>
+                  <option value="3">Derby Amador n2 n3 n4</option>
+                  <option value="4">Derby Amador n1</option>
+                  <option value="5">Derby Pré futurity Aberta n2 n3 n4</option>
+                  <option value="6">Derby Pré futurity Amador n2 n3 n4</option>
+                  <option value="7">Derby Jovem</option>
+                  <option value="8">Derby Jovem 10</option>
                 </select>
-                <div class="custom-control-inline custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" name="nivel1" value="1" id="customCheck1">
-                  <label class="custom-control-label" style="margin-right: 10px" for="customCheck1">Nível 1</label>
-                </div>
-                 <div class="custom-control-inline custom-checkbox">
-                   <input type="checkbox" class="custom-control-input" name="nivel2"value="1" id="customCheck2">
-                  <label class="custom-control-label" style="margin-right: 10px" for="customCheck2">Nível 2</label>
-                </div>
-                 <div class="custom-control-inline custom-checkbox">
-                   <input type="checkbox" class="custom-control-input" name="nivel3"value="1" id="customCheck3">
-                  <label class="custom-control-label" style="margin-right: 10px" for="customCheck3">Nível 3</label>
-                </div>
-                 <div class="custom-control-inline custom-checkbox">
-                   <input type="checkbox" class="custom-control-input" name="nivel4"value="1" id="customCheck4">
-                  <label class="custom-control-label" style="margin-right: 10px" for="customCheck4">Nível 4</label>
-                </div>
-                <div class="form-group" style="margin: 10px">
-                    <input type="number" name="oe" class="form-control" placeholder="Ordem de entrada">
-                 </div>
-                  <div class="form-group" style="margin: 10px">
-                      <input type="number" name="exh" class="form-control" placeholder="EXH#">
-                  </div>
-                   <div class="form-group" style="margin: 10px">
-                      <input type="text" name="cavaleiro" class="form-control" placeholder="Cavaleiro/Amazona">
-                  </div>
-                   <div class="form-group" style="margin: 10px">
-                      <input type="text" name="animal" class="form-control" placeholder="animal">
-                  </div>
-                   <div class="form-group" style="margin: 10px">
-                      <input type="text" name="proprietario" class="form-control" placeholder="Proprietário">
-                  </div>
-                   <div class="form-group" style="margin: 10px">
-                      <input type="text" name="cidade" class="form-control" placeholder="Cidade, UF">
-                  </div>
-                  <button type="submit" class="btn btn-dark">Cadastrar</button>
-
+             <div class="input-group-append">
+                <button class="btn btn-outline-secondary"  type="submit">Carregar</button>
+             </div>
             </div>
-        </div>
-        
-      </form></center>
+              </form>
+      <?php
+                       include('conexao.php');
+                        
+                      if (isset($_POST['provaid'])) {
+                        
+                      
+                      $prova=$_POST['provaid'];                   
+                      $query =("select draw, exh, provanome, provacategoria, cavaleiro, proprietario, animal, nivel1, nivel2, nivel3, nivel4, cidade from conjunto inner join prova on conjunto.provaid=prova.provaid
+                        where conjunto.provaid='$prova';") or die(mysql_error());
+                      $result = mysqli_query($conexao,$query);
+                      $dados = mysqli_fetch_assoc($result);
+                  ?>
+                   <div class="table-responsive">
+                <table class="table table-striped">
+
+                  
+                      <thead>
+                        <tr>
+                          <th scope="col">DRAW</th>
+                          <th scope="col">EXH#</th>
+                          <th scope="col">Cavaleiro/Amazona</th>
+                          <th scope="col">Animal</th>
+                          <th scope="col">Proprietário</th>
+                          <th scope="col">Cidade, UF</th>
+                          <th scope="col">Nível 1</th>
+                          <th scope="col">Nível 2</th>
+                          <th scope="col">Nível 3</th>
+                          <th scope="col">Nível 4</th>
+                          <th scope="col">Nota</th>
+                          
+
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <!-- linha 1--><?php
+                    
+                        while ($dados = mysqli_fetch_assoc($result)) {
+                          
+                        
+                        ?>
+                        <tr>
+                          <td><h5><?php echo $dados['draw'];?></h5></td>
+                          <td><h5><?php echo $dados['exh'];?></h5></td>
+                         <td><h5><?php echo $dados['cavaleiro'];?></h5></td>
+                           <td>
+                            <h5><?php echo $dados['animal'];?></h5>
+                            </td>
+                           <td>
+                            <h5><?php echo $dados['proprietario'];?></h5>
+                            </td>
+                           <td>
+                            <h5><?php echo $dados['cidade'];?></h5>
+                            </td>
+                            <td>
+                            <h2><?php 
+                             if($dados['nivel1']==1){
+                             echo '°';
+                            }
+                            ?></h2>
+                            </td>
+                           <td>
+                            <h2><?php 
+                            if($dados['nivel2']==1){
+                             echo '°';
+                            }?></h2>
+                            </td>
+                            <td><h2>
+                            <?php 
+                            if($dados['nivel3']==1){
+                             echo '°';
+                            }?></h2>
+                            </td>
+                            <td><h2>
+                            <?php 
+                            if($dados['nivel4']==1){
+                             echo '°';
+                            }?></h2>
+                            </td>
+                            <td>
+                              
+                            </td>
+                                                   
+                        </tr>
+                      <?php }}?>
+                      </tbody>
+                    </table>
+              </div>
+            </div>
 
           
 

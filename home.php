@@ -63,7 +63,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="ordemdeentrada.php">
+          <a class="nav-link" href="oehome.php">
             <i class="fas fa-fw fa-table"></i>
             <span>Ordem de entrada</span></a>
         </li>
