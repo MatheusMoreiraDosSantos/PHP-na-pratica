@@ -85,10 +85,11 @@
               Score Card
             </div>
             <div class="card-body">
+              
               <form method="post" >
                
               <div class="input-group">
-                <select class="custom-select"  name="provaid"  >
+                <select class="custom-select" id="select"  name="provaid"  >
                   <option value="0" selected="">Selecione a categoria</option>
                   <option value="1">Derby Aberta n2 n3 n4</option>
                   <option value="2">Derby Aberta n1</option>
@@ -100,10 +101,12 @@
                   <option value="8">Derby Jovem 10</option>
                 </select>
              <div class="input-group-append">
-                <button class="btn btn-outline-secondary"  type="submit">Carregar</button>
+                <button class="btn btn-outline-secondary"  style="submit">Carregar</button>
              </div>
             </div>
               </form>
+              
+              
               <?php
                        include('conexao.php');
                         
@@ -113,11 +116,16 @@
                       $prova=$_POST['provaid'];                   
                       $query =("select draw, exh, provanome, provacategoria from conjunto inner join prova on conjunto.provaid=prova.provaid
                         where conjunto.provaid='$prova';") or die(mysql_error());
+                      $querynome =("select provanome, provacategoria from conjunto inner join prova on conjunto.provaid=prova.provaid
+                        where conjunto.provaid='$prova';") or die(mysql_error());
                       $resultado = mysqli_query($conexao,$query);
-                      $dados = mysqli_fetch_assoc($resultado);
+                      $result = mysqli_query($conexao,$querynome);
+                      $nome = mysqli_fetch_assoc($result);
+                    
                   ?>
+               <center><h4><?php   echo $nome['provanome']; echo " "; echo $nome['provacategoria'];?></h4></center>
                   
-            <center><h5><?php echo $dados['provanome'];?>    <?php echo $dados['provacategoria'];?></h5></center>
+            
                           
               
 
@@ -196,116 +204,148 @@
                         <tr>
                           <td><h5><?php echo $dados['draw'];?></h5></td>
                           <td><h5><?php echo $dados['exh'];?></h5></td>
-                         <td><strong>penalty<br>score</strong></td>
+                         <td><strong>penalty<br><br>score</strong></td>
+                         <form id="form">
                            <td>
-                            <input type="number" name="" style="width: 72px; height: 40px"><br>
-                                <select id="n2" style="height:40px">
-                                    <option>+1 1/2</option>
-                                    <option>+1</option>
-                                    <option>+1/2</option>
-                                    <option selected="">0</option>
-                                    <option>-1/2</option>
-                                    <option>-1</option>
-                                    <option>-1 1/2</option>
+                            <input type="number" id="penalidade1" style="width: 72px; height: 40px"><br>
+                                <select  id="manobra1" style="height:40px">
+                                    <option value="1,5">+1 1/2</option>
+                                    <option value="1">+1</option>
+                                    <option value="0,5">+1/2</option>
+                                    <option value="0" selected="">0</option>
+                                    <option value="-0,5">-1/2</option>
+                                    <option value="-1">-1</option>
+                                    <option value="-1,5">-1 1/2</option>
 
-                                </select>
+                                </select><br>
+                           <input type="button" style="width: 72px" id="salva" value="Salvar">
+                         </form>
                             </td>
                            <td>
-                            <input type="number" name="" style="width: 72px; height: 40px"><br>
-                                <select style="height:40px">
-                                    <option>+1 1/2</option>
-                                    <option>+1</option>
-                                    <option>+1/2</option>
-                                    <option selected="">0</option>
-                                    <option>-1/2</option>
-                                    <option>-1</option>
-                                    <option>-1 1/2</option>
+                            <form id="form">
+                           
+                            <input type="number" id="penalidade1" style="width: 72px; height: 40px"><br>
+                                <select  id="manobra1" style="height:40px">
+                                    <option value="1,5">+1 1/2</option>
+                                    <option value="1">+1</option>
+                                    <option value="0,5">+1/2</option>
+                                    <option value="0" selected="">0</option>
+                                    <option value="-0,5">-1/2</option>
+                                    <option value="-1">-1</option>
+                                    <option value="-1,5">-1 1/2</option>
 
-                                </select>
+                                </select><br>
+                           <input type="button" style="width: 72px" id="salva" value="Salvar">
+                         </form>
                             </td>
                            <td>
-                            <input type="number" name="" style="width: 72px; height: 40px"><br>
-                                <select id="n3" style="height:40px">
-                                    <option>+1 1/2</option>
-                                    <option>+1</option>
-                                    <option>+1/2</option>
-                                    <option selected="">0</option>
-                                    <option>-1/2</option>
-                                    <option>-1</option>
-                                    <option>-1 1/2</option>
+                          <form id="form">
+                           
+                            <input type="number" id="penalidade1" style="width: 72px; height: 40px"><br>
+                                <select  id="manobra1" style="height:40px">
+                                    <option value="1,5">+1 1/2</option>
+                                    <option value="1">+1</option>
+                                    <option value="0,5">+1/2</option>
+                                    <option value="0" selected="">0</option>
+                                    <option value="-0,5">-1/2</option>
+                                    <option value="-1">-1</option>
+                                    <option value="-1,5">-1 1/2</option>
 
-                                </select>
+                                </select><br>
+                           <input type="button" style="width: 72px" id="salva" value="Salvar">
+                         </form>
                             </td>
                            <td>
-                            <input type="number" name="" style="width: 72px; height: 40px"><br>
-                                <select id="n4" style="height:40px">
-                                    <option>+1 1/2</option>
-                                    <option>+1</option>
-                                    <option>+1/2</option>
-                                    <option selected="">0</option>
-                                    <option>-1/2</option>
-                                    <option>-1</option>
-                                    <option>-1 1/2</option>
+                              <form id="form">
+                           
+                            <input type="number" id="penalidade1" style="width: 72px; height: 40px"><br>
+                                <select  id="manobra1" style="height:40px">
+                                    <option value="1,5">+1 1/2</option>
+                                    <option value="1">+1</option>
+                                    <option value="0,5">+1/2</option>
+                                    <option value="0" selected="">0</option>
+                                    <option value="-0,5">-1/2</option>
+                                    <option value="-1">-1</option>
+                                    <option value="-1,5">-1 1/2</option>
 
-                                </select>
+                                </select><br>
+                           <input type="button" style="width: 72px" id="salva" value="Salvar">
+                         </form>
                             </td>
                            <td>
-                            <input type="number" name="" style="width: 72px; height: 40px"><br>
-                                <select id="n5" style="height:40px">
-                                   <option>+1 1/2</option>
-                                    <option>+1</option>
-                                    <option>+1/2</option>
-                                    <option selected="">0</option>
-                                    <option>-1/2</option>
-                                    <option>-1</option>
-                                    <option>-1 1/2</option>
+                              <form id="form">
+                           
+                            <input type="number" id="penalidade1" style="width: 72px; height: 40px"><br>
+                                <select  id="manobra1" style="height:40px">
+                                    <option value="1,5">+1 1/2</option>
+                                    <option value="1">+1</option>
+                                    <option value="0,5">+1/2</option>
+                                    <option value="0" selected="">0</option>
+                                    <option value="-0,5">-1/2</option>
+                                    <option value="-1">-1</option>
+                                    <option value="-1,5">-1 1/2</option>
 
-                                </select>
+                                </select><br>
+                           <input type="button" style="width: 72px" id="salva" value="Salvar">
+                         </form>
                             </td>
                            <td>
-                            <input type="number" name="" style="width: 72px; height: 40px"><br>
-                                <select id="n6" style="height:40px">
-                                   <option>+1 1/2</option>
-                                    <option>+1</option>
-                                    <option>+1/2</option>
-                                    <option selected="">0</option>
-                                    <option>-1/2</option>
-                                    <option>-1</option>
-                                    <option>-1 1/2</option>
+                              <form id="form">
+                           
+                            <input type="number" id="penalidade1" style="width: 72px; height: 40px"><br>
+                                <select  id="manobra1" style="height:40px">
+                                    <option value="1,5">+1 1/2</option>
+                                    <option value="1">+1</option>
+                                    <option value="0,5">+1/2</option>
+                                    <option value="0" selected="">0</option>
+                                    <option value="-0,5">-1/2</option>
+                                    <option value="-1">-1</option>
+                                    <option value="-1,5">-1 1/2</option>
 
-                                </select>
+                                </select><br>
+                           <input type="button" style="width: 72px" id="salva" value="Salvar">
+                         </form>
                             </td>
                            <td>
-                            <input type="number" name="" style="width: 72px; height: 40px"><br>
-                                <select id="n7" style="height:40px">
-                                    <option>+1 1/2</option>
-                                    <option>+1</option>
-                                    <option>+1/2</option>
-                                    <option selected="">0</option>
-                                    <option>-1/2</option>
-                                    <option>-1</option>
-                                    <option>-1 1/2</option>
+                              <form id="form">
+                           
+                            <input type="number" id="penalidade1" style="width: 72px; height: 40px"><br>
+                                <select  id="manobra1" style="height:40px">
+                                    <option value="1,5">+1 1/2</option>
+                                    <option value="1">+1</option>
+                                    <option value="0,5">+1/2</option>
+                                    <option value="0" selected="">0</option>
+                                    <option value="-0,5">-1/2</option>
+                                    <option value="-1">-1</option>
+                                    <option value="-1,5">-1 1/2</option>
 
-                                </select>
+                                </select><br>
+                           <input type="button" style="width: 72px" id="salva" value="Salvar">
+                         </form>
                             </td>
                           <td>
-                            <input type="number" name="" style="width: 72px; height: 40px"><br>
-                                <select id="n8" style="height:40px">
-                                    <option>+1 1/2</option>
-                                    <option>+1</option>
-                                    <option>+1/2</option>
-                                    <option selected="">0</option>
-                                    <option>-1/2</option>
-                                    <option>-1</option>
-                                    <option>-1 1/2</option>
+                              <form id="form">
+                           
+                            <input type="number" id="penalidade1" style="width: 72px; height: 40px"><br>
+                                <select  id="manobra1" style="height:40px">
+                                    <option value="1,5">+1 1/2</option>
+                                    <option value="1">+1</option>
+                                    <option value="0,5">+1/2</option>
+                                    <option value="0" selected="">0</option>
+                                    <option value="-0,5">-1/2</option>
+                                    <option value="-1">-1</option>
+                                    <option value="-1,5">-1 1/2</option>
 
-                                </select>
+                                </select><br>
+                           <input type="button" style="width: 72px" id="salva" value="Salvar">
+                         </form>
                             </td> 
                             
                             <td id="total">
                                 
 
-                            </td>                         
+                            </td> 
+                                                  
                         </tr>
                       <?php }}?>
                       </tbody>
@@ -380,6 +420,8 @@
     <script src="js/demo/chart-area-demo.js"></script>
 
     <script src="js/percursos.js"></script>
+    <script src="js/salvanotas.js"></script>
+    
 
   </body>
 

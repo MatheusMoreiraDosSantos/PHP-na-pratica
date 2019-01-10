@@ -121,7 +121,7 @@
                       $query =("select draw, exh, provanome, provacategoria, cavaleiro, proprietario, animal, nivel1, nivel2, nivel3, nivel4, cidade from conjunto inner join prova on conjunto.provaid=prova.provaid
                         where conjunto.provaid='$prova';") or die(mysql_error());
                       $result = mysqli_query($conexao,$query);
-                      $dados = mysqli_fetch_assoc($result);
+                      
                   ?>
                    <div class="table-responsive">
                 <table class="table table-striped">
@@ -165,25 +165,25 @@
                             <h5><?php echo $dados['cidade'];?></h5>
                             </td>
                             <td>
-                            <h2><?php 
+                            <h2 style="color: green"><?php 
                              if($dados['nivel1']==1){
                              echo '°';
                             }
                             ?></h2>
                             </td>
                            <td>
-                            <h2><?php 
+                            <h2 style="color: green"><?php 
                             if($dados['nivel2']==1){
                              echo '°';
                             }?></h2>
                             </td>
-                            <td><h2>
+                            <td><h2 style="color: green">
                             <?php 
                             if($dados['nivel3']==1){
                              echo '°';
                             }?></h2>
                             </td>
-                            <td><h2>
+                            <td><h2 style="color: green">
                             <?php 
                             if($dados['nivel4']==1){
                              echo '°';
