@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-
   <head>
 
     <meta charset="utf-8">
@@ -40,39 +38,17 @@
       
       
 
-      <!-- Navbar Search -->
+      <!-- Navbar Search nao utilizado nesta versao do sistema-->
       <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Pesquisar..." aria-label="Search" aria-describedby="basic-addon2">
-          <div class="input-group-append">
-            <button class="btn btn-primary" type="button">
-              <i class="fas fa-search"></i>
-            </button>
-          </div>
         </div>
       </form>
-
-      <!-- Navbar -->
-      <ul class="navbar-nav ml-auto ml-md-0">
-        <li class="nav-item dropdown no-arrow">
-          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-user-circle fa-fw"></i>
-          </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-            <a class="dropdown-item" href="#">Configurações</a>
-            <a class="dropdown-item" href="#">Conta</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Sair</a>
-          </div>
-        </li>
-      </ul>
-
     </nav>
 
     <div id="wrapper">
 
-      <!-- Sidebar -->
-      <ul class="sidebar navbar-nav">
+      <!-- Sidebar  menu a esquerda da pagina-->
+      <ul class="sidebar navbar-nav toggled">
         <li class="nav-item ">
           <a class="nav-link" href="home.php">
             <i class="fas fa-fw fa-table"></i>
@@ -90,18 +66,17 @@
       <div id="content-wrapper">
          <div class="card-body">
         <form method="post" >
-               
+               <!-- select prova -->
               <div class="input-group">
                 <select class="custom-select"  name="provaid"  >
                   <option value="0" selected="">Selecione a categoria</option>
-                  <option value="1">Derby Aberta n2 n3 n4</option>
-                  <option value="2">Derby Aberta n1</option>
-                  <option value="3">Derby Amador n2 n3 n4</option>
-                  <option value="4">Derby Amador n1</option>
-                  <option value="5">Derby Pré futurity Aberta n2 n3 n4</option>
-                  <option value="6">Derby Pré futurity Amador n2 n3 n4</option>
-                  <option value="7">Derby Jovem</option>
-                  <option value="8">Derby Jovem 10</option>
+                  <option value="1">NCCR Aberta n2 n3 n4</option>
+                  <option value="2">NCCR Aberta n1</option>
+                  <option value="3">NCCR Amador n2 n3 n4</option>
+                  <option value="4">NCCR Amador n1</option>
+                  <option value="5">NCCR Jovem 13</option>
+                  <option value="6">NCCR Jovem 15</option>
+                  <option value="7">NCCR Jovem 10</option>
                 </select>
              <div class="input-group-append">
                 <button class="btn btn-outline-secondary"  type="submit">Carregar</button>
@@ -110,14 +85,19 @@
               </form>
       <?php
                        include('conexao.php');
-                        
+                        //se select prova estiver alterado
                       if (isset($_POST['provaid'])) {
                         
                       
                       $prova=$_POST['provaid'];                   
-                      $query =("select draw, exh, provanome, provacategoria, cavaleiro, proprietario, animal, nivel1, nivel2, nivel3, nivel4, cidade from conjunto inner join prova on conjunto.provaid=prova.provaid
-                        where conjunto.provaid='$prova';") or die(mysql_error());
-                      $result = mysqli_query($conexao,$query);
+                      $query =("select draw, exh, conjunto.conjuntoid, cavaleiro, proprietario,
+                                animal, nivel1, nivel2, nivel3, nivel4, cidade 
+                                from conjunto left outer join prova 
+                                on conjunto.provaid=prova.provaid     
+                                where conjunto.provaid='$prova';")
+
+                      or die(mysql_error());
+                      $result = mysqli_query($conexao,$query);                    
                      
                   ?>
                    <div class="table-responsive">
@@ -143,7 +123,7 @@
                       </thead>
                       <tbody>
                         <!-- linha 1--><?php
-                    
+                    //com loop - show dados
                         while ($dados = mysqli_fetch_assoc($result)) {
                           
                         
@@ -162,32 +142,71 @@
                             <h5><?php echo $dados['cidade'];?></h5>
                             </td>
                             <td>
-                            <h2 style="color: green"><?php 
+                            <h2><?php 
                              if($dados['nivel1']==1){
-                             echo '°';
+                            echo '<img src="img/check.jpg" width="20px">';
                             }
                             ?></h2>
                             </td>
                            <td>
-                            <h2 style="color: green"><?php 
+                            <h2><?php 
                             if($dados['nivel2']==1){
-                             echo '°';
+                             echo '<img src="img/check.jpg" width="20px">';
                             }?></h2>
                             </td>
-                            <td><h2 style="color: green">
+                            <td><h2>
                             <?php 
                             if($dados['nivel3']==1){
-                             echo '°';
+                             echo '<img src="img/check.jpg" width="20px">';
                             }?></h2>
                             </td>
-                            <td><h2 style="color: green">
+                            <td><h2>
                             <?php 
                             if($dados['nivel4']==1){
-                             echo '°';
+                             echo '<img src="img/check.jpg" width="20px">';
                             }?></h2>
                             </td>
                             <td>
-                              
+                              <h5> 
+             <!-- show total das notas - (maior nota + manor nota) -->
+                                <?php
+                                $conjuntoid = $dados['conjuntoid'];
+                                $querynotas = "select notas.total from notas 
+                                               left outer join juiznota on notas.notasid=juiznota.notasid
+                                               left outer join conjunto on conjunto.conjuntoid=juiznota.conjuntoid
+                                  where conjunto.conjuntoid = $conjuntoid ;"
+                                                    or die(mysql_error());
+                                $resultadonotas = mysqli_query($conexao,$querynotas);
+                                $total = array();
+                                $con = 0;
+
+                                while ($dadostotal = mysqli_fetch_assoc($resultadonotas)) {
+                               
+                                    $total[$con] = $dadostotal['total'];
+                                    $con++;
+                                    
+                                }
+
+                                // echo "<pre>";
+                                // print_r($total);
+                                // echo "</pre>";
+
+                                $somatoria = 0;
+
+                                if(count($total)){
+                                  $max = max($total);
+                                  $min = min($total);
+
+                                  foreach ($total as $key => $value) {
+                                    $somatoria += $value;
+                                  }
+
+                                    $somatoria = $somatoria - ( $max + $min );
+                                }
+                                  echo $somatoria;
+                                ?>
+                                
+                              </h5>
                             </td>
                                                    
                         </tr>
@@ -203,7 +222,7 @@
         <!-- /.container-fluid -->
 
         <!-- Sticky Footer -->
-        <footer class="sticky-footer">
+        <footer class="sticky-footer" style="background-color: white; width: 80%;">
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
               <span>Copyright © Sistema de Notas ao Vivo</span>
@@ -221,25 +240,6 @@
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fas fa-angle-up"></i>
     </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Deseja realmente sair?</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">Selecione "SAIR" abaixo se você estiver pronto para terminar sua sessão atual.</div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">CANCELAR</button>
-            <a class="btn btn-primary" href="sair.php">SAIR</a>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -259,8 +259,6 @@
     <!-- Demo scripts for this page-->
     <script src="js/demo/datatables-demo.js"></script>
     <script src="js/demo/chart-area-demo.js"></script>
-
-    <script src="js/percursos.js"></script>
 
   </body>
 

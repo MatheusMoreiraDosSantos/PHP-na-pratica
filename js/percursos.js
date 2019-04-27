@@ -1,7 +1,11 @@
 function percursos() {
+
+	/*pegando valor do select html*/
 	var btnpercurso = document.getElementById('selectpercurso').value;
 	
-	/*pegando valor do select html*/
+	
+
+	// os IFs verifica qual percurso esta marcado para mostrar as manobras
 	if (btnpercurso == 1) {
 		document.getElementById("manobra1").innerHTML = 'RBE';
 		document.getElementById("manobra2").innerHTML = 'E+R';

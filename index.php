@@ -1,5 +1,5 @@
 <?php
-session_start();
+session_start(); //inicia a sessao
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -10,7 +10,7 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="Matheus Moreira">
 
     <title>Sistema de Notas ao Vivo - Entrar</title>
 
@@ -29,12 +29,18 @@ session_start();
 
     <div class="container">
       <div class="card card-login mx-auto mt-5">
-        <div class="card-header">Entrar</div>
+        <div class="card-header">Entrar <a class="d-block  mt-3" href="home.php">Ir para o painel de notas</a></div>
         <div class="card-body">
           <form action="login.php" method="post">
+
             <?php
             if(isset($_SESSION['nao_autenticado'])):
+              
             ?>
+            <script language="javascript" type="text/javascript">
+                navigator.vibrate(500);
+            </script>
+             <!-- alerta -->
             <div class="alert alert-danger" role="alert">
               SENHA OU USUÁRIO INCORRETOS!
             </div>
@@ -42,6 +48,7 @@ session_start();
             endif;
             unset($_SESSION['nao_autenticado']);
             ?>
+            
             <div class="form-group">
               <div class="form-label-group">
                 <input type="text"  id="inputnome" name="usuario" class="form-control" placeholder="Nome" required="required" autofocus="autofocus">
@@ -55,7 +62,7 @@ session_start();
               </div>
             </div> 
             
-            <button class="btn btn-primary btn-block" type="submit">Entrar</button>
+            <button class="btn btn-primary btn-block"  type="submit">Entrar</button>
                
             
           </form>
@@ -73,6 +80,13 @@ session_start();
 
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+     <script type="text/javascript">
+      function vibrar(ms) {
+        navigator.vibrate(ms);
+      }
+                
+    </script>
 
   </body>
 

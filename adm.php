@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<?php
-    include('verifica_login.php');  
-
-    ?>
+  <?php
+    include('verifica_login.php'); 
+  ?>
 
   <head>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Sistema para mostrar a construcao das notas ao vivo">
+    <meta name="author" content="Matheus Moreira">
 
     <title>Sistema de Notas ao Vivo</title>
 
@@ -39,33 +38,27 @@
       <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
         <i class="fas fa-bars"></i>
       </button>
-
+      <!-- ola usuario -->
       <h5 style="margin-left: 2%; margin-top: 8px" class="text-white bg-dark"><?php echo 'Olá '. $_SESSION['usuario'];?></h5>
       
 
-      <!-- Navbar Search -->
+      <!-- Navbar Search nao utilizado nesta versao-->
       <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Pesquisar..." aria-label="Search" aria-describedby="basic-addon2">
-          <div class="input-group-append">
-            <button class="btn btn-primary" type="button">
-              <i class="fas fa-search"></i>
-            </button>
-          </div>
         </div>
       </form>
 
-      <!-- Navbar -->
+      <!-- Navbar  onde estao as opcoes conta e sair-->
       <ul class="navbar-nav ml-auto ml-md-0">
         <li class="nav-item dropdown no-arrow">
-          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-user-circle fa-fw"></i>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-            <a class="dropdown-item" href="#">Configurações</a>
-            <a class="dropdown-item" href="#">Conta</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Sair</a>
+              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#contaModal">Conta</a>
+                <div class="dropdown-divider">                
+                </div>
+              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Sair</a>
           </div>
         </li>
       </ul>
@@ -74,8 +67,8 @@
 
     <div id="wrapper">
 
-      <!-- Sidebar -->
-      <ul class="sidebar navbar-nav">
+      <!-- Sidebar menu a esquerda da pagina-->
+      <ul class="sidebar navbar-nav toggled">
         <li class="nav-item active">
           <a class="nav-link" href="adm.php">
             <i class="fas fa-fw fa-table"></i>
@@ -87,90 +80,87 @@
             <span>Ordem de entrada</span>
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="gerardocumento.php">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Gerar Documentos</span></a>
+        </li>
         
       </ul>
 
       <div id="content-wrapper">
         
-       
-        <center><form method="post" action="cadastraconjunto.php">
+        <center>
+          <form method="post" action="cadastraconjunto.php">
+            <div class="card-body" style="width: 35rem;">
+               <img class="" src="img/cadastrar.jpg" alt="Imagem de capa do card" width="200px" style="margin-top: -50px">
+                  <div class="card-body" >
+                     <h5 class="card-title">Cadastrar Conjunto  </h5>
+                        <select class="form-control form-control-lg" name="prova" >
+                           <option value="0">Selecione a categoria</option>
+                         <option value="1">NCCR Aberta n2 n3 n4</option>
+                  <option value="2">NCCR Aberta n1</option>
+                  <option value="3">NCCR Amador n2 n3 n4</option>
+                  <option value="4">NCCR Amador n1</option>
+                  <option value="5">NCCR Jovem 13</option>
+                  <option value="6">NCCR Jovem 15</option>
+                  <option value="7">NCCR Jovem 10</option>
 
-          <div class="card-body" style="width: 35rem;">
-            <img class="" src="img/cadastrar.jpg" alt="Imagem de capa do card" width="200px" style="margin-top: -50px">
-            <div class="card-body" >
-             <h5 class="card-title">Cadastrar Conjunto</h5>
-                <select class="form-control form-control-lg" name="prova" >
-                <option value="0">Selecione a categoria</option>
-                <option value="1">Derby Aberta n2 n3 n4</option>
-                <option value="2">Derby Aberta n1</option>
-                <option value="3">Derby Amador n2 n3 n4</option>
-                <option value="4">Derby Amador n1</option>
-                <option value="5">Derby Pré futurity Aberta n2 n3 n4</option>
-                <option value="6">Derby Pré futurity Amador n2 n3 n4</option>
-                <option value="7">Derby Jovem</option>
-                <option value="8">Derby Jovem 10</option>
+                        </select>
+                      <div class="custom-control-inline custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" name="nivel1" value="1" id="customCheck1">
+                        <label class="custom-control-label" style="margin-right: 10px" for="customCheck1">Nível 1</label>
+                      </div>
+                      <div class="custom-control-inline custom-checkbox">
+                         <input type="checkbox" class="custom-control-input" name="nivel2"value="1" id="customCheck2">
+                         <label class="custom-control-label" style="margin-right: 10px" for="customCheck2">Nível 2</label>
+                      </div>
+                      <div class="custom-control-inline custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" name="nivel3"value="1" id="customCheck3">
+                        <label class="custom-control-label" style="margin-right: 10px" for="customCheck3">Nível 3</label>
+                      </div>
+                      <div class="custom-control-inline custom-checkbox">
+                         <input type="checkbox" class="custom-control-input" name="nivel4"value="1" id="customCheck4">
+                        <label class="custom-control-label" style="margin-right: 10px" for="customCheck4">Nível 4</label>
+                      </div>
+                      <div class="form-group" style="margin: 10px">
+                         <input type="number" name="oe" class="form-control" placeholder="Ordem de entrada">
+                      </div>
+                      <div class="form-group" style="margin: 10px">
+                          <input type="number" name="exh" class="form-control" placeholder="EXH#">
+                      </div>
+                      <div class="form-group" style="margin: 10px">
+                         <input type="text" name="cavaleiro" class="form-control" placeholder="Cavaleiro/Amazona">
+                      </div>
+                      <div class="form-group" style="margin: 10px">
+                          <input type="text" name="animal" class="form-control" placeholder="animal">
+                      </div>
+                      <div class="form-group" style="margin: 10px">
+                          <input type="text" name="proprietario" class="form-control" placeholder="Proprietário">
+                      </div>
+                      <div class="form-group" style="margin: 10px">
+                          <input type="text" name="cidade" class="form-control" placeholder="Cidade, UF">
+                      </div>
+                  
+                        <button type="submit" class="btn btn-dark">Cadastrar</button>
 
-                </select>
-                <div class="custom-control-inline custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" name="nivel1" value="1" id="customCheck1">
-                  <label class="custom-control-label" style="margin-right: 10px" for="customCheck1">Nível 1</label>
-                </div>
-                 <div class="custom-control-inline custom-checkbox">
-                   <input type="checkbox" class="custom-control-input" name="nivel2"value="1" id="customCheck2">
-                  <label class="custom-control-label" style="margin-right: 10px" for="customCheck2">Nível 2</label>
-                </div>
-                 <div class="custom-control-inline custom-checkbox">
-                   <input type="checkbox" class="custom-control-input" name="nivel3"value="1" id="customCheck3">
-                  <label class="custom-control-label" style="margin-right: 10px" for="customCheck3">Nível 3</label>
-                </div>
-                 <div class="custom-control-inline custom-checkbox">
-                   <input type="checkbox" class="custom-control-input" name="nivel4"value="1" id="customCheck4">
-                  <label class="custom-control-label" style="margin-right: 10px" for="customCheck4">Nível 4</label>
-                </div>
-                <div class="form-group" style="margin: 10px">
-                    <input type="number" name="oe" class="form-control" placeholder="Ordem de entrada">
-                 </div>
-                  <div class="form-group" style="margin: 10px">
-                      <input type="number" name="exh" class="form-control" placeholder="EXH#">
                   </div>
-                   <div class="form-group" style="margin: 10px">
-                      <input type="text" name="cavaleiro" class="form-control" placeholder="Cavaleiro/Amazona">
-                  </div>
-                   <div class="form-group" style="margin: 10px">
-                      <input type="text" name="animal" class="form-control" placeholder="animal">
-                  </div>
-                   <div class="form-group" style="margin: 10px">
-                      <input type="text" name="proprietario" class="form-control" placeholder="Proprietário">
-                  </div>
-                   <div class="form-group" style="margin: 10px">
-                      <input type="text" name="cidade" class="form-control" placeholder="Cidade, UF">
-                  </div>
-                  <button type="submit" class="btn btn-dark">Cadastrar</button>
-
-            </div>
-        </div>
-        
-      </form></center>
-
-          
-
-      
-        <!-- /.container-fluid -->
+            </div>    
+         </form>
+        </center>
 
         <!-- Sticky Footer -->
-        <footer class="sticky-footer">
-          <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-              <span>Copyright © Sistema de Notas ao Vivo</span>
-            </div>
-          </div>
-        </footer>
+            <footer>
+              <div class="container my-auto">
+               <div class="copyright text-center my-auto">
+                  <span>Copyright © Sistema de Notas ao Vivo</span>
+               </div>
+             </div>
+            </footer>
 
-      </div>
-      <!-- /.content-wrapper -->
+      </div><!-- /.content-wrapper -->
 
-    </div>
-    <!-- /#wrapper -->
+    </div><!-- /#wrapper -->
 
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
@@ -192,6 +182,109 @@
             <button class="btn btn-secondary" type="button" data-dismiss="modal">CANCELAR</button>
             <a class="btn btn-primary" href="sair.php">SAIR</a>
           </div>
+        </div>
+      </div>
+    </div>
+    <!-- conta Modal-->
+    <div class="modal fade" id="contaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center>
+              <h5 class="text-dark">
+                <?php 
+                  include ('conexao.php');
+                    $nomeusuario = $_SESSION['usuario'];
+                    $queryemail=("select usuarioemail, usuarioid from usuario where usuarionome='$nomeusuario';") or die(mysql_error());
+                    echo 'Sua conta, '. $_SESSION['usuario'];
+                    $email = mysqli_query($conexao, $queryemail);
+                    $resultemail = mysqli_fetch_assoc($email);
+                    echo '<br>   O seu E-mail esta como : '.$resultemail['usuarioemail'];
+                ?>
+              </h5>
+            <center>
+          </div>
+          <div class="modal-footer" > <!-- buttons alterar -->
+            <button class="btn btn-outline-secondary" type="button" data-toggle="modal"data-target="#alterarnome" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">Alterar Nome</span>
+            </button>
+            <button class="btn btn-outline-secondary" type="button" data-toggle="modal" data-target="#alterarsenha" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">Alterar Senha</span>
+            </button>
+            <button  class="btn btn-outline-secondary" type="button" data-toggle="modal" data-target="#apagaconta" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">Apagar Conta</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- alterar nome Modal-->
+    <div class="modal fade" id="alterarnome" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Quase lá :)</h5>
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+          </div>
+            <form method="POST" action="alteranome.php">
+              <div class="modal-footer">
+                  <input type="text"  id="nome" name="nome" class="form-control" placeholder="Digite o seu nome atual" required="required" autofocus="autofocus">
+            
+                  <input type="text"  id="novonome" name="novonome" class="form-control" placeholder="Digite o Seu Novo Nome" required="required" autofocus="autofocus">
+              </div>
+                  <button class="btn btn-primary btn-block" type="submit">Alterar</button>
+            </form>
+          </div>
+      </div>
+    </div>
+    
+
+      <!-- modal altera senha  -->
+    <div class="modal fade" id="alterarsenha" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Quase lá :)</h5>
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                 <span aria-hidden="true">×</span>
+              </button>
+          </div>
+          <form method="POST" action="alterasenha.php">
+              <div class="modal-footer">
+                <input type="text"  id="senha" name="senha" class="form-control" placeholder="Digite sua senha atual" required="required" autofocus="autofocus">
+            
+                <input type="text"  id="novasenha" name="novasenha" class="form-control" placeholder="Digite sua nova senha" required="required" autofocus="autofocus">
+              </div>
+                <button class="btn btn-primary btn-block" type="submit">Alterar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+        <!-- modal apagar conta  -->
+   <div class="modal fade" id="apagaconta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Quase lá :(</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+          </div>
+            
+              <div class="modal-body">Deseja REALMENTE apagar sua conta?</div>
+          
+          <form method="POST" action="apagaconta.php">
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">CANCELAR</button>
+                    <input type="hidden" name="apagar" id="apagar" value="1">
+                    <input type="hidden" name="nomedousuario" value="<?=$_SESSION['usuario']?>">
+                    <button class="btn btn-primary" type="submit">Sim, APAGAR</button>
+                </div>
+          </form>
         </div>
       </div>
     </div>
